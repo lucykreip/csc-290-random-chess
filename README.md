@@ -21,5 +21,8 @@ bot choose moves
 pick moves at random
 - Random.randomInt() --> get random index from list 
 
+## Objective 
+ You will be graded based on whether your program properly generates and accepts valid chess moves and FEN positions without crashing or needing to be terminated and restarted. 
+
 
 
