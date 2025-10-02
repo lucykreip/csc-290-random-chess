@@ -1,10 +1,14 @@
 import chess
 import random
+import datetime
 
 def main ():
 
-    print("Welcome to Chess!")
-    botColor = input("Should the computer player be black or white(b or w)? ")
+    print("-"*20)
+    print(f"\tWelcome to Chess!")
+    print("-"*20)
+    print(f"Time: {datetime.datetime.now()}")
+    botColor = input("Computer player? (w=white/b=black) ")
     startingFEN = input("Starting FEN position? (hit ENTER for standard starting postion) ")
     board = None
     if (startingFEN == ""):
@@ -12,23 +16,21 @@ def main ():
     else:
         board = chess.Board(startingFEN)
     
-
-
     botName = ""
     playerName = "" 
     
     if (botColor == "w"):
        botColor = chess.WHITE
-       botName = "Bot(as white)"
-       playerName = "Player(as black)"
-       print(botName)
-       print(playerName)
+       botName = "Bot (as white)"
+       playerName = "Black"
+    #    print(botName)
+    #    print(playerName)
     elif (botColor == "b"):
         botColor = chess.BLACK
-        botName = "Bot(as black)"
-        playerName = "Player(as white)"
-        print(botName)
-        print(playerName)
+        botName = "Bot (as black)"
+        playerName = "White"
+        # print(botName)
+        # print(playerName)
 
     print("Printing Initial Board......")
     print(board)
@@ -36,7 +38,7 @@ def main ():
     while not board.is_game_over() :
         # if its the bots turn 
         if (board.turn == botColor):
-            moveList =list(board.legal_moves)
+            moveList = list(board.legal_moves)
             randIndex = random.randint(0,len(moveList)-1)
 
             botMove = moveList[randIndex]
@@ -48,17 +50,15 @@ def main ():
                     
             print(f"{botName}: {botMove}")
 
-            # when turn is done, push the move to the board, change who's turn it is so the board
-            # knows, and update the boolean isBotMove
             board.push(botMove)
-            board.turn = not isBotMove
-            isBotMove = False 
-            print("New FEN position: " + board.fen())
+            print(f"New FEN position: {board.fen()}")
         else:
-            moveList =list(board.legal_moves)
+            moveList = list(board.legal_moves)
 
             playerInput = input(f"{playerName}: ")
             
+            playerMove = None
+
             try:
                 playerMove = chess.Move.from_uci(playerInput)
             except:
@@ -69,26 +69,14 @@ def main ():
                 print("That move is not legal! Try again?")
             else:
                 board.push(playerMove)
-                board.turn = isBotMove
-                isBotMove = True
-                print("New FEN position: " + board.fen())
+                print(f"New FEN position: {board.fen()}")
         print(board)
         
 
-        # print(f"Printing isBotMove: {isBotMove}")
-        
-
-
-            
-    # TO DO : All we need to do is randomize from the list of legal moves for the bot  within the while loop !  
-
     print(board)
-    # print(botName)
-    # print(playerName)
-    # board.turn = False
-    # True == white and False == black 
-    # print(board.turn)
+    print(f"Game Result: {board.result()}")
 
+    board.reset()
 
 
 if __name__ == "__main__":
