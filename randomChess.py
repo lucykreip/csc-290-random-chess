@@ -13,32 +13,30 @@ def main ():
         board = chess.Board(startingFEN)
     
 
-    isOver = False
+
     botName = ""
     playerName = "" 
-    isBotMove = None
+    
     if (botColor == "w"):
        botColor = chess.WHITE
-       botName = "Bot (as white)"
-       playerName = "Black"
-    #    isbotMove = board.turn(botColor)
-       isBotMove = True
-       board.turn = isBotMove
+       botName = "Bot(as white)"
+       playerName = "Player(as black)"
+       print(botName)
+       print(playerName)
     elif (botColor == "b"):
         botColor = chess.BLACK
-        botName = "Bot (as black)"
-        playerName = "White"
-        isBotMove = False
-        board.turn = not isBotMove
+        botName = "Bot(as black)"
+        playerName = "Player(as white)"
+        print(botName)
+        print(playerName)
 
-    
+    print("Printing Initial Board......")
     print(board)
-
-    while (isOver == False) :
-        if (isBotMove == True):
-
+    print("-----------------")
+    while not board.is_game_over() :
+        # if its the bots turn 
+        if (board.turn == botColor):
             moveList =list(board.legal_moves)
-
             randIndex = random.randint(0,len(moveList)-1)
 
             botMove = moveList[randIndex]
@@ -89,7 +87,7 @@ def main ():
     # print(playerName)
     # board.turn = False
     # True == white and False == black 
-    print(board.turn)
+    # print(board.turn)
 
 
 
