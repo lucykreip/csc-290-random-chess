@@ -4,12 +4,13 @@ import datetime
 
 def main ():
 
-    print("-"*20)
+    print("-"*33)
     print(f"\tWelcome to Chess!")
-    print("-"*20)
+    print("-"*33)
     print(f"Time: {datetime.datetime.now()}")
-    botColor = input("Computer player? (w=white/b=black) ")
-    startingFEN = input("Starting FEN position? (hit ENTER for standard starting postion) ")
+
+    botColor = input("Computer player? (w=white/b=black): ")
+    startingFEN = input("Starting FEN position? (hit ENTER for standard starting postion): ")
     board = None
     if (startingFEN == ""):
         board = chess.Board()
@@ -23,14 +24,10 @@ def main ():
        botColor = chess.WHITE
        botName = "Bot (as white)"
        playerName = "Black"
-    #    print(botName)
-    #    print(playerName)
     elif (botColor == "b"):
         botColor = chess.BLACK
         botName = "Bot (as black)"
         playerName = "White"
-        # print(botName)
-        # print(playerName)
 
     print("Printing Initial Board......")
     print(board)
@@ -70,11 +67,14 @@ def main ():
             else:
                 board.push(playerMove)
                 print(f"New FEN position: {board.fen()}")
-        print(board)
-        
+        # print(board)
 
-    print(board)
+        f = open("gameFen.txt", "w")
+        f.write(f"Last Fen: {board.fen()}")
+
+    print("-----------------")
     print(f"Game Result: {board.result()}")
+    print(board)
 
     board.reset()
 
