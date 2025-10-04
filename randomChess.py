@@ -67,7 +67,7 @@ def main ():
             else:
                 board.push(playerMove)
                 print(f"New FEN position: {board.fen()}")
-        # print(board)
+        print(board)
 
         f = open("gameFen.txt", "w")
         f.write(f"Last Fen: {board.fen()}")
